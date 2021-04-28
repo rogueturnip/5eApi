@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build",
+    "lib": ["es2018", "dom"],
+    "esModuleInterop": true,
+        "target": "es6" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018',
+ 'ES2019', 'ES2020', or 'ESNEXT'. */,
+    "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020
+', or 'ESNext'. */,
+    "sourceMap": true /* Generates corresponding '.map' file. */,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "typeRoots": [
+      "./src/@types", // custom merged types must be first in a list
+      "./src/node_modules/@types"
+    ]
+  },
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts"
+  ],
+    "exclude": ["@types", "node_modules", "**/*.spec.ts", "**/*.test.ts"]
+}
