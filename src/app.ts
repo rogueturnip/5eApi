@@ -6,6 +6,7 @@ import { authHandler } from './middleware/auth.middleware';
 import { MainController } from './controllers/main.controller';
 import { SpellController } from './controllers/spell.controller';
 import { MonsterController } from './controllers/monster.controller';
+import { RaceController } from './controllers/race.controller';
 import connect from './database/connect';
 import { DATABASE } from './constants/settings.constants';
 
@@ -15,6 +16,7 @@ class App {
   public mainController: MainController;
   public spellController: SpellController;
   public monsterController: MonsterController;
+  public raceController: RaceController;
 
   constructor() {
     this.app = express();
@@ -24,6 +26,7 @@ class App {
     this.mainController = new MainController(this.app);
     this.spellController = new SpellController(this.app);
     this.monsterController = new MonsterController(this.app);
+    this.raceController = new RaceController(this.app);
   }
 
   private setConfig() {
