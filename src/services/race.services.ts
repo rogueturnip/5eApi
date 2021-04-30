@@ -38,10 +38,13 @@ export class RaceService {
       return res.status(400).json({ errors: errors.array() });
     }
     console.log('id', id);
-    const spell: IRace = await Race.findOne({ id: id });
-    if (raw) {
-      return res.status(200).json(spell);
+    const race: IRace = await Race.findOne({ id: id });
+    if (race == null) {
+      return res.status(404).json({ message: 'not found' });
     }
-    return res.status(200).json(RaceFormatter.singleRace(spell));
+    if (raw) {
+      return res.status(200).json(race);
+    }
+    return res.status(200).json(RaceFormatter.singleRace(race));
   }
 }

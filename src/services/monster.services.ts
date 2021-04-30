@@ -53,6 +53,9 @@ export class MonsterService {
       return res.status(400).json({ errors: errors.array() });
     }
     const monster: IMonster = await Monster.findOne({ id: id });
+    if (monster == null) {
+      return res.status(404).json({ message: 'not found' });
+    }
     if (raw) {
       return res.status(200).json(monster);
     }

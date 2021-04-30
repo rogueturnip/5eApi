@@ -39,6 +39,9 @@ export class SpellService {
     }
     console.log('id', id);
     const spell: ISpell = await Spell.findOne({ id: id });
+    if (spell == null) {
+      return res.status(404).json({ message: 'not found' });
+    }
     if (raw) {
       return res.status(200).json(spell);
     }
