@@ -7,6 +7,7 @@ import { MainController } from './controllers/main.controller';
 import { SpellController } from './controllers/spell.controller';
 import { MonsterController } from './controllers/monster.controller';
 import { RaceController } from './controllers/race.controller';
+import { ItemController } from './controllers/item.controller';
 import connect from './database/connect';
 import { DATABASE } from './constants/settings.constants';
 
@@ -17,6 +18,7 @@ class App {
   public spellController: SpellController;
   public monsterController: MonsterController;
   public raceController: RaceController;
+  public itemController: ItemController;
 
   constructor() {
     this.app = express();
@@ -27,6 +29,7 @@ class App {
     this.spellController = new SpellController(this.app);
     this.monsterController = new MonsterController(this.app);
     this.raceController = new RaceController(this.app);
+    this.itemController = new ItemController(this.app);
   }
 
   private setConfig() {
