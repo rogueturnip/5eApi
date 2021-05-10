@@ -8,8 +8,10 @@ import { SpellController } from './controllers/spell.controller';
 import { MonsterController } from './controllers/monster.controller';
 import { RaceController } from './controllers/race.controller';
 import { ItemController } from './controllers/item.controller';
+import { ClassController } from './controllers/class.controller';
 import connect from './database/connect';
 import { DATABASE } from './constants/settings.constants';
+import { Class } from './models/class.model';
 
 class App {
   public app: Application;
@@ -19,6 +21,7 @@ class App {
   public monsterController: MonsterController;
   public raceController: RaceController;
   public itemController: ItemController;
+  public classController: ClassController;
 
   constructor() {
     this.app = express();
@@ -30,6 +33,7 @@ class App {
     this.monsterController = new MonsterController(this.app);
     this.raceController = new RaceController(this.app);
     this.itemController = new ItemController(this.app);
+    this.classController = new ClassController(this.app);
   }
 
   private setConfig() {
