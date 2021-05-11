@@ -8,7 +8,7 @@ export interface IRace extends Document {
   otherSources: any;
   additionalSources: any;
   page: number;
-  size: string;
+  size: any;
   speed: any;
   ability: any;
   languageProficiencies: any;
@@ -18,6 +18,8 @@ export interface IRace extends Document {
   darkvision: number;
   feats: number;
   skillProficiencies: any;
+  weaponProficiencies: any;
+  armorProficiencies: any;
   srd: any;
   heightAndWeight: any;
   additionalSpells: any;
@@ -26,6 +28,8 @@ export interface IRace extends Document {
   conditionImmune: any;
   lineage: boolean;
   creatureTypes: any;
+  entriesFluff: any;
+  images: any;
 }
 
 const RaceSchema: Schema = new Schema({
@@ -36,7 +40,7 @@ const RaceSchema: Schema = new Schema({
   otherSources: { type: Schema.Types.Mixed, require: true, unique: false },
   additionalSources: { type: Schema.Types.Mixed, require: true, unique: false },
   page: { type: Number, require: false, unique: false },
-  size: { type: String, require: false, unique: false },
+  size: { type: Schema.Types.Mixed, require: false, unique: false },
   speed: { type: Schema.Types.Mixed, require: false, unique: false },
   ability: { type: Schema.Types.Mixed, require: false, unique: false },
   languageProficiencies: {
@@ -54,6 +58,16 @@ const RaceSchema: Schema = new Schema({
     require: false,
     unique: false,
   },
+  weaponProficiencies: {
+    type: Schema.Types.Mixed,
+    require: false,
+    unique: false,
+  },
+  armorProficiencies: {
+    type: Schema.Types.Mixed,
+    require: false,
+    unique: false,
+  },
   srd: { type: Schema.Types.Mixed, require: false, unique: false },
   heightAndWeight: { type: Schema.Types.Mixed, require: false, unique: false },
   additionalSpells: { type: Schema.Types.Mixed, require: false, unique: false },
@@ -62,6 +76,8 @@ const RaceSchema: Schema = new Schema({
   conditionImmune: { type: Schema.Types.Mixed, require: false, unique: false },
   lineage: { type: Boolean, require: false, unique: false },
   creatureTypes: { type: Schema.Types.Mixed, require: false, unique: false },
+  entriesFluff: { type: Schema.Types.Mixed, require: false, unique: false },
+  images: { type: Schema.Types.Mixed, require: false, unique: false },
 });
 
 export const Race: Model<IRace> = mongoose.model('Race', RaceSchema);

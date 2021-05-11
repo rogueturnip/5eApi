@@ -5,7 +5,6 @@ export interface IClass extends Document {
   name: string;
   source: string;
   page: number;
-  base: boolean;
 }
 
 const ClassSchema: Schema = new Schema({
@@ -14,7 +13,6 @@ const ClassSchema: Schema = new Schema({
   source: { type: String, require: false, unique: false },
   page: { type: Number, require: false, unique: false },
   // base: { type: Schema.Types.Mixed, require: false, unique: false },
-  base: { type: Boolean, require: false, unique: false },
 });
 
 export const Class: Model<IClass> = mongoose.model('Class', ClassSchema);
