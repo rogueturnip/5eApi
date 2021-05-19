@@ -9,9 +9,9 @@ import { MonsterController } from './controllers/monster.controller';
 import { RaceController } from './controllers/race.controller';
 import { ItemController } from './controllers/item.controller';
 import { ClassController } from './controllers/class.controller';
+import { GraphQlController } from './controllers/graphql.controller';
 import connect from './database/connect';
 import { DATABASE } from './constants/settings.constants';
-import { Class } from './models/class.model';
 
 class App {
   public app: Application;
@@ -22,6 +22,7 @@ class App {
   public raceController: RaceController;
   public itemController: ItemController;
   public classController: ClassController;
+  public graphqlController: GraphQlController;
 
   constructor() {
     this.app = express();
@@ -34,6 +35,10 @@ class App {
     this.raceController = new RaceController(this.app);
     this.itemController = new ItemController(this.app);
     this.classController = new ClassController(this.app);
+    this.graphqlController = new GraphQlController();
+
+    // enable graphql endpoint
+    this.graphqlController.applyMiddleware(this.app);
   }
 
   private setConfig() {

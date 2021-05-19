@@ -1,35 +1,46 @@
-const path = require("path");
-const nodeExternals = require("webpack-node-externals");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const NodemonPlugin = require("nodemon-webpack-plugin");
+const path = require('path');
 
-const { NODE_ENV = "development" } = process.env;
+const nodeExternals = require('webpack-node-externals');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const NodemonPlugin = require('nodemon-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
+
+const { NODE_ENV = 'development' } = process.env;
 
 module.exports = {
   entry: {
-    server: "./src/server.ts",
+    server: './src/server.ts',
   },
   output: {
-    filename: "[name].bundle.js",
+    filename: '[name].bundle.js',
     // filename: "index.js",
-    path: path.resolve(__dirname, "dist"),
-    libraryTarget: "commonjs",
+    path: path.resolve(__dirname, 'dist'),
+    libraryTarget: 'commonjs',
   },
   mode: NODE_ENV,
-  target: "node",
+  target: 'node',
   module: {
     rules: [
       {
         test: /\.ts(x?)$/,
-        use: "ts-loader",
+        use: 'ts-loader',
         exclude: /node_modules/,
       },
     ],
   },
   externals: [nodeExternals()],
-  watch: NODE_ENV === "development",
+  watch: NODE_ENV === 'development',
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: ['.ts', '.js'],
   },
-  plugins: [new CleanWebpackPlugin(), new NodemonPlugin()],
+  plugins: [
+    new CleanWebpackPlugin(),
+    new NodemonPlugin(),
+    new Dotenv({
+      path:
+        process.env.NODE_ENV === 'production'
+          ? __dirname + '/src/environment/production.env'
+          : __dirname + '/src/environment/development.env',
+    }),
+  ],
 };
