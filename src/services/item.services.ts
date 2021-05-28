@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IItem, Item } from '../models/item.model';
+import { ItemModel as Item } from '../models/item.model';
 import { validationResult } from 'express-validator';
 import { ItemFormatter } from '../formatters/item.formatter';
 
@@ -19,7 +19,7 @@ export class ItemService {
     const skip: number = (page - 1) * limit;
     let query = {};
     if (req.query?.base) query = { base: true };
-    const items: Array<IItem> = await Item.find(query)
+    const items = await Item.find(query)
       .skip(skip)
       .limit(limit)
       .sort({ id: 1 });
@@ -40,7 +40,7 @@ export class ItemService {
       return res.status(400).json({ errors: errors.array() });
     }
     console.log('id', id);
-    const item: IItem = await Item.findOne({ id: id });
+    const item = await Item.findOne({ id: id });
     if (item == null) {
       return res.status(404).json({ message: 'not found' });
     }

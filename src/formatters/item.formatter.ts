@@ -7,6 +7,7 @@ export class ItemFormatter {
       name: item.name,
       source: item.source,
       page: item.page,
+      base: item.base,
     };
   };
 }

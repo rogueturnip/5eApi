@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IClass, Class } from '../models/class.model';
+import { ClassModel as Class } from '../models/class.model';
 import { validationResult } from 'express-validator';
 import { ClassFormatter } from '../formatters/class.formatter';
 
@@ -19,7 +19,7 @@ export class ClassService {
     const skip: number = (page - 1) * limit;
     let query = {};
     if (req.query?.base) query = { base: true };
-    const items: Array<IClass> = await Class.find(query)
+    const items = await Class.find(query)
       .skip(skip)
       .limit(limit)
       .sort({ id: 1 });
@@ -40,7 +40,7 @@ export class ClassService {
       return res.status(400).json({ errors: errors.array() });
     }
     console.log('id', id);
-    const item: IClass = await Class.findOne({ id: id });
+    const item = await Class.findOne({ id: id });
     if (item == null) {
       return res.status(404).json({ message: 'not found' });
     }
