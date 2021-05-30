@@ -1,2 +1,2 @@
-export const PORT = 9002;
-export const DATABASE = "";
+export const PORT = process.env.PORT;
+export const DATABASE = process.env.MONGODB;
