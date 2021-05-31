@@ -183,3 +183,42 @@ export type DataCondition = string;
 export type DataDamageType = string;
 export type DataOptionalFeatureType = string;
 export type Srd = boolean | string;
+
+export interface DamageImmunityObject {
+  preNote?: string;
+  immunne: DamageImmunityArray;
+  note?: string;
+  cond?: boolean;
+}
+export type DamageImmunityArray =
+  | (DataDamageType | DamageImmunityObject | Special)[]
+  | null;
+
+export interface DamageResistObject {
+  preNote?: string;
+  resist: DamageResistObject;
+  note?: string;
+  cond?: boolean;
+}
+export type DamageResistArray =
+  | (DataDamageType | DamageResistObject | Special)[]
+  | null;
+
+export interface DamageVulnerabilityObject {
+  preNote?: string;
+  vulnerable: DamageImmunityArray;
+  note?: string;
+  cond?: boolean;
+}
+export type DamageVulnerabilityArray =
+  | (DataDamageType | DamageVulnerabilityObject | Special)[]
+  | null;
+
+export interface ConditionImmunityObject {
+  preNote?: string;
+  conditionImmune: ConditionImmunityArray;
+  note?: string;
+}
+export type ConditionImmunityArray =
+  | (DataCondition | ConditionImmunityObject | Special)[]
+  | null;
