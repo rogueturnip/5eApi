@@ -28,17 +28,17 @@ class Monster {
   @prop({ required: false })
   public cr: any;
   @prop({ required: true })
-  public cha: any;
+  public cha: number;
   @prop({ required: true })
-  public con: any;
+  public con: number;
   @prop({ required: true })
-  public dex: any;
+  public dex: number;
   @prop({ required: true })
-  public int: any;
+  public int: number;
   @prop({ required: true })
-  public wis: any;
+  public wis: number;
   @prop({ required: true })
-  public str: any;
+  public str: number;
   @prop({ required: false })
   public saves: any;
   @prop({ required: false })
@@ -48,7 +48,7 @@ class Monster {
   @prop({ required: false })
   public trait: any;
   @prop({ required: false })
-  public actionNote: any;
+  public actionNote: string;
   @prop({ required: false })
   public action: any;
   @prop({ required: false })
@@ -74,7 +74,7 @@ class Monster {
   @prop({ required: false })
   public legendaryHeader: any;
   @prop({ required: false })
-  public page: any;
+  public page: number;
   @prop({ required: false })
   public type: any;
   @prop({ required: false })
@@ -121,6 +121,8 @@ class Monster {
   public regionalEffects: any;
   @prop({ required: false })
   public mythicEncounter: any;
+  @prop({ required: false })
+  public familiar: boolean;
 }
 
 export const MonsterModel = getModelForClass(Monster);
