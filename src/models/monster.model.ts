@@ -1,5 +1,42 @@
-import { prop, getModelForClass } from '@typegoose/typegoose';
+import { prop, getModelForClass, modelOptions } from '@typegoose/typegoose';
+import { OtherSources, CreatureTypeObject, Speed, Saves } from './util.model';
 
+interface AlignObject {
+  alignment: Align[];
+  chance?: string;
+  note?: string;
+}
+
+interface Special {
+  special: string;
+}
+
+type Align = string | AlignObject | Special;
+
+interface AcItemObject {
+  ac: number;
+  from?: string[];
+  condition?: string;
+  braces?: boolean;
+}
+
+type AcItem = number | AcItemObject | Special;
+
+interface CrObject {
+  cr: string;
+  lair?: string;
+  coven?: string;
+  xp?: number;
+}
+
+type Cr = string | CrObject;
+
+interface Hp {
+  average?: number;
+  formula?: string;
+}
+
+@modelOptions({ options: { allowMixed: 0 } })
 class Monster {
   @prop({ required: true })
   public id: string;
@@ -16,17 +53,17 @@ class Monster {
   @prop({ required: false })
   public group: string | null;
   @prop({ required: false })
-  public alignment: any;
+  public alignment: Align[];
   @prop({ required: true })
   public size: string; // could be an enum
   @prop({ required: false })
   public sizeNote: string;
   @prop({ required: true })
-  public speed: any;
+  public speed: Speed;
   @prop({ required: true })
-  public ac: any;
+  public ac: AcItem[];
   @prop({ required: false })
-  public cr: any;
+  public cr: Cr;
   @prop({ required: true })
   public cha: number;
   @prop({ required: true })
@@ -40,11 +77,11 @@ class Monster {
   @prop({ required: true })
   public str: number;
   @prop({ required: false })
-  public saves: any;
+  public saves: Saves;
   @prop({ required: false })
-  public languages: any;
+  public languages: string[] | null;
   @prop({ required: true })
-  public hp: any;
+  public hp: Hp | Special;
   @prop({ required: false })
   public trait: any;
   @prop({ required: false })
@@ -58,16 +95,6 @@ class Monster {
   @prop({ required: false })
   public spellcasting: any;
   @prop({ required: false })
-  public miscTags: any;
-  @prop({ required: false })
-  public actionTags: any;
-  @prop({ required: false })
-  public damageTags: any;
-  @prop({ required: false })
-  public traitTags: any;
-  @prop({ required: false })
-  public senseTags: any;
-  @prop({ required: false })
   public legendary: any;
   @prop({ required: false })
   public legendaryGroup: any;
@@ -76,9 +103,9 @@ class Monster {
   @prop({ required: false })
   public page: number;
   @prop({ required: false })
-  public type: any;
+  public type: string | CreatureTypeObject;
   @prop({ required: false })
-  public senses: any;
+  public senses: string[] | null;
   @prop({ required: false })
   public conditionImmune: any;
   @prop({ required: false })
@@ -98,11 +125,11 @@ class Monster {
   @prop({ required: false })
   public skill: any;
   @prop({ required: true })
-  public passive: any;
+  public passive: number | string;
   @prop({ required: false })
   public images: any;
   @prop({ required: false })
-  public otherSources: any;
+  public otherSources: OtherSources[];
   @prop({ required: false })
   public soundClip: any;
   @prop({ required: false })
