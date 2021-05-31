@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IMonster, Monster } from '../models/monster.model';
+import { MonsterModel as Monster } from '../models/monster.model';
 import { validationResult } from 'express-validator';
 import { MonsterFormatter } from '../formatters/monster.formatter';
 
@@ -17,10 +17,8 @@ export class MonsterService {
       page = maxPages;
     }
     const skip: number = (page - 1) * limit;
-    const monsters: Array<IMonster> = await Monster.find({})
-      .skip(skip)
-      .limit(limit);
-    // const monsters: Array<IMonster> = await Monster.aggregate([
+    const monsters = await Monster.find({}).skip(skip).limit(limit);
+    // const monsters = await Monster.aggregate([
     //   {
     //     "$facet": {
     //       "totalData": [
@@ -52,7 +50,7 @@ export class MonsterService {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const monster: IMonster = await Monster.findOne({ id: id });
+    const monster = await Monster.findOne({ id: id });
     if (monster == null) {
       return res.status(404).json({ message: 'not found' });
     }
