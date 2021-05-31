@@ -1,14 +1,16 @@
 import { prop, getModelForClass, modelOptions } from '@typegoose/typegoose';
-import { OtherSources, CreatureTypeObject, Speed, Saves } from './util.model';
+import {
+  OtherSources,
+  CreatureTypeObject,
+  Speed,
+  Saves,
+  Special,
+} from './util.model';
 
 interface AlignObject {
   alignment: Align[];
   chance?: string;
   note?: string;
-}
-
-interface Special {
-  special: string;
 }
 
 type Align = string | AlignObject | Special;
@@ -36,7 +38,7 @@ interface Hp {
   formula?: string;
 }
 
-@modelOptions({ options: { allowMixed: 0 } })
+@modelOptions({ options: { allowMixed: 1 } })
 class Monster {
   @prop({ required: true })
   public id: string;
@@ -129,7 +131,7 @@ class Monster {
   @prop({ required: false })
   public images: any;
   @prop({ required: false })
-  public otherSources: OtherSources[];
+  public otherSources: OtherSources;
   @prop({ required: false })
   public soundClip: any;
   @prop({ required: false })
