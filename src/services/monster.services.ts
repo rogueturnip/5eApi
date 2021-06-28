@@ -12,7 +12,7 @@ export class MonsterService {
     const limit: number = +req.query?.page_size || 10;
     let page: number = +req.query?.page || 1;
     const monsterCount: number = await Monster.count({});
-    const maxPages = Math.ceil(monsterCount / limit);
+    const maxPages: number = Math.ceil(monsterCount / limit);
     if (page > maxPages) {
       page = maxPages;
     }
@@ -57,6 +57,7 @@ export class MonsterService {
     if (raw) {
       return res.status(200).json(monster);
     }
-    return res.status(200).json(monster);
+    return res.status(200).json(MonsterFormatter.singleMonster(monster));
+    // return res.status(200).json(monster);
   }
 }

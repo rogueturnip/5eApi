@@ -1,6 +1,10 @@
 import { Application } from 'express';
-import { ApolloServer, gql, makeExecutableSchema } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
 import { apollo } from '../config';
+import * as _ from 'lodash';
+import { typeDef as Monster } from '../graphql/schemas/monsterTypeDefs';
+import { typeDef as Race } from '../graphql/schemas/raceTypeDefs';
+import { resolvers as monsterResolvers } from '../graphql/resolvers/monsterResolvers';
 
 export class GraphQlController {
   public server: ApolloServer;
@@ -12,16 +16,8 @@ export class GraphQlController {
       mockEntireSchema: apollo.mockSchema,
       playground: apollo.playground,
       context: ({ req, res }: any) => ({ req, res }),
-      typeDefs: gql`
-        type Query {
-          hello: String
-        }
-      `,
-      resolvers: {
-        Query: {
-          hello: () => 'Hello world!',
-        },
-      },
+      typeDefs: [Monster],
+      resolvers: _.merge({}, monsterResolvers),
     });
   }
 

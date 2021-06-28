@@ -1,13 +1,18 @@
-import { Parser } from '5eutils';
+// import { Parser } from '5eutils';
+import { Parser } from '../../../5eUtils';
 
 export class MonsterFormatter {
-  static singleMonster = (monster) => {
+  static singleMonster = (monster: any) => {
     return {
       id: monster.id,
       name: monster.name,
+      source: {
+        abrv: monster.source,
+        full: Parser.getFullSource(monster.source) || 'unknown',
+      },
       alias: monster.alias || [],
       group: monster.group || null,
-      type: monster.type || null,
+      creatureType: Parser.getCreatureType(monster.type) || null,
       pbNote: monster.pbNote || null,
       hp: monster.hp,
       ac: { text: Parser.acToFull(monster.ac), details: monster.ac },
