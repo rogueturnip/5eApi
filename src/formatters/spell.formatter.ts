@@ -1,4 +1,5 @@
-import { Parser } from '5eutils';
+// import { Parser } from '5eutils';
+import { Parser } from '../../../5eUtils';
 
 export class SpellFormatter {
   static singleSpell = (spell) => {

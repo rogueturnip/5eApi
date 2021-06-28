@@ -70,7 +70,10 @@ export class MonsterFormatter {
         persuasion: parseInt(monster.skill?.persuasion) || 0,
         'passive perception': parseInt(monster.passive) || 0,
       },
-      speed: Parser.getSpeedString({ speed: monster.speed }),
+      speed: {
+        text: Parser.getSpeedString({ speed: monster.speed }),
+        details: monster.speed,
+      },
       senses: Parser.senseToObject(monster.senses) || [],
       conditions: {
         immune: monster.conditionImmune || [],

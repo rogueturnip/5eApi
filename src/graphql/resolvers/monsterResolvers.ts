@@ -11,7 +11,9 @@ export const resolvers = {
     monsters: async (_, { limit = 10, offset = 0 }) => {
       const monsters = await Monster.find({}).skip(offset).limit(limit);
       //   console.log('monsters', monsters);
-      return monsters;
+      return await Promise.all(
+        monsters.map((monster) => MonsterFormatter.singleMonster(monster)),
+      );
     },
   },
 };

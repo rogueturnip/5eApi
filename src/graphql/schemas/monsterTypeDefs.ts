@@ -28,11 +28,36 @@ export const typeDef = gql`
     details: JSON
   }
 
+  type Attributes {
+    cha: Int!
+    con: Int!
+    dex: Int!
+    int: Int!
+    str: Int!
+    wis: Int!
+  }
+
+  type Saves {
+    cha: Int!
+    con: Int!
+    dex: Int!
+    int: Int!
+    str: Int!
+    wis: Int!
+  }
+
+  type Speed {
+    text: String
+    details: JSON
+  }
+
   type Monster {
     id: String!
     name: String!
     alias: [String]
     page: Int
+    size: String
+    speed: Speed
     source: Source
     group: String
     creatureType: CreatureType
@@ -41,6 +66,10 @@ export const typeDef = gql`
     ac: Ac
     cr: Cr
     alignment: String
+    attr: Attributes
+    saves: Saves
+    languages: [String]
+    environment: [String]
   }
 
   type Query {
