@@ -45,6 +45,8 @@ class Monster {
   @prop({ required: true })
   public name: string;
   @prop({ required: false })
+  public _copy: any;
+  @prop({ required: false })
   public shortName: string;
   @prop({ required: true })
   public source: string;

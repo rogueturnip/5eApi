@@ -18,8 +18,8 @@ export class MonsterFormatter {
       ac: { text: Parser.acToFull(monster.ac), details: monster.ac },
       cr: {
         text: Parser.monCrToFull(monster.cr),
-        primary: monster.cr,
-        details: typeof monster.cr === 'object' ? monster.cr : {},
+        details:
+          typeof monster.cr === 'object' ? monster.cr : { cr: monster.cr },
       },
       alignment: Parser.alignmentAbvToFull({
         alignment: monster.alignment,
@@ -52,14 +52,14 @@ export class MonsterFormatter {
       skills: {
         athletics: parseInt(monster.skill?.athletics) || 0,
         acrobatics: parseInt(monster.skill?.acrobatics) || 0,
-        'sleight of hand': parseInt(monster.skill?.['sleight of hand']) || 0,
+        sleightOfHand: parseInt(monster.skill?.['sleight of hand']) || 0,
         stealth: parseInt(monster.skill?.stealth) || 0,
         arcana: parseInt(monster.skill?.arcana) || 0,
         history: parseInt(monster.skill?.history) || 0,
         investigation: parseInt(monster.skill?.investigation) || 0,
         nature: parseInt(monster.skill?.nature) || 0,
         religion: parseInt(monster.skill?.religion) || 0,
-        'animal handling': parseInt(monster.skill?.['animal handling']) || 0,
+        animalHandling: parseInt(monster.skill?.['animal handling']) || 0,
         insight: parseInt(monster.skill?.insight) || 0,
         medicine: parseInt(monster.skill?.medicine) || 0,
         perception: parseInt(monster.skill?.perception) || 0,
@@ -68,11 +68,11 @@ export class MonsterFormatter {
         intimidation: parseInt(monster.skill?.intimidation) || 0,
         performance: parseInt(monster.skill?.performance) || 0,
         persuasion: parseInt(monster.skill?.persuasion) || 0,
-        'passive perception': parseInt(monster.passive) || 0,
+        passivePerception: parseInt(monster.passive) || 0,
       },
       speed: {
         text: Parser.getSpeedString({ speed: monster.speed }),
-        details: monster.speed,
+        details: monster.speed || {},
       },
       senses: Parser.senseToObject(monster.senses) || [],
       conditions: {

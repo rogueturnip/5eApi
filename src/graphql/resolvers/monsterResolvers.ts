@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { MonsterModel as Monster } from '../../models/monster.model';
 import { MonsterFormatter } from '../../formatters/monster.formatter';
 
@@ -9,10 +10,12 @@ export const resolvers = {
       return MonsterFormatter.singleMonster(monster);
     },
     monsters: async (_, { limit = 10, offset = 0 }) => {
-      const monsters = await Monster.find({}).skip(offset).limit(limit);
+      let monsters = await Monster.find({}).skip(offset).limit(limit);
       //   console.log('monsters', monsters);
       return await Promise.all(
-        monsters.map((monster) => MonsterFormatter.singleMonster(monster)),
+        monsters.map((monster) => {
+          return MonsterFormatter.singleMonster(monster);
+        }),
       );
     },
   },

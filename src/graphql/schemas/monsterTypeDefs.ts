@@ -24,7 +24,6 @@ export const typeDef = gql`
 
   type Cr {
     text: String
-    primary: String
     details: JSON
   }
 
@@ -46,9 +45,44 @@ export const typeDef = gql`
     wis: Int!
   }
 
+  type Skills {
+    athletics: Int!
+    acrobatics: Int!
+    sleightOfHand: Int!
+    stealth: Int!
+    arcana: Int!
+    history: Int!
+    investigation: Int!
+    nature: Int!
+    religion: Int!
+    animalHandling: Int!
+    insight: Int!
+    medicine: Int!
+    perception: Int!
+    survival: Int!
+    deception: Int!
+    intimidation: Int!
+    performance: Int!
+    persuasion: Int!
+    passivePerception: Int!
+  }
+
   type Speed {
     text: String
     details: JSON
+  }
+
+  type Conditions {
+    immune: JSON
+    inflict: JSON
+    inflictLegendary: JSON
+    inflictSpell: JSON
+  }
+
+  type Damage {
+    immune: JSON
+    resist: JSON
+    vulnerabilities: JSON
   }
 
   type Monster {
@@ -70,6 +104,10 @@ export const typeDef = gql`
     saves: Saves
     languages: [String]
     environment: [String]
+    skills: Skills
+    conditions: Conditions
+    senses: JSON
+    damage: Damage
   }
 
   type Query {
