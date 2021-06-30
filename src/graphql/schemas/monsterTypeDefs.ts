@@ -108,6 +108,11 @@ export const typeDef = gql`
     conditions: Conditions
     senses: JSON
     damage: Damage
+    action: JSON
+    actionNote: String
+    reaction: JSON
+    bonus: JSON
+    spellcasting: JSON
   }
 
   type Query {
